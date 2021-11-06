@@ -1,6 +1,8 @@
 package com.nurullahisik.todo_app.controller;
 
 import com.nurullahisik.todo_app.entity.User;
+import com.nurullahisik.todo_app.request.UserLoginRequest;
+import com.nurullahisik.todo_app.request.UserRegisterRequest;
 import com.nurullahisik.todo_app.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,24 +17,21 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User user)
+    public ResponseEntity<User> login(UserLoginRequest request)
     {
-
-        return null;
+        return ResponseEntity.ok(userService.login(request));
     }
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUserInfo(@PathVariable Long userId)
     {
-
-        return null;
+        return ResponseEntity.ok(userService.getUser(userId));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user)
+    public ResponseEntity<User> register(UserRegisterRequest request)
     {
-
-        return null;
+        return ResponseEntity.ok(userService.register(request));
     }
 
 }
