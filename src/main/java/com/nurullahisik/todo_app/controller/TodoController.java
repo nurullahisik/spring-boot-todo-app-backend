@@ -3,6 +3,7 @@ package com.nurullahisik.todo_app.controller;
 import com.nurullahisik.todo_app.entity.Todo;
 import com.nurullahisik.todo_app.request.TodoCreateRequest;
 import com.nurullahisik.todo_app.request.TodoUpdateRequest;
+import com.nurullahisik.todo_app.response.TodoResponse;
 import com.nurullahisik.todo_app.service.TodoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,18 +21,18 @@ public class TodoController {
     }
 
     @GetMapping("/{userId}/list")
-    public ResponseEntity<List<Todo>> getUserTodoList(@PathVariable Optional<Long> userId) {
-        List<Todo> todos = todoService.getUserTodoList(userId);
+    public ResponseEntity<List<TodoResponse>> getUserTodoList(@PathVariable Optional<Long> userId) {
+        List<TodoResponse> todos = todoService.getUserTodoList(userId);
         return ResponseEntity.ok(todos);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Todo> create(TodoCreateRequest newTodo) {
+    public ResponseEntity<TodoResponse> create(TodoCreateRequest newTodo) {
         return ResponseEntity.ok(todoService.create(newTodo));
     }
 
     @PutMapping("/{todoId}")
-    public ResponseEntity<Todo> update(@PathVariable Long todoId, TodoUpdateRequest request) {
+    public ResponseEntity<TodoResponse> update(@PathVariable Long todoId, TodoUpdateRequest request) {
         return ResponseEntity.ok(todoService.update(todoId, request));
     }
 

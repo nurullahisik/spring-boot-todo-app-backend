@@ -3,6 +3,7 @@ package com.nurullahisik.todo_app.controller;
 import com.nurullahisik.todo_app.entity.User;
 import com.nurullahisik.todo_app.request.UserLoginRequest;
 import com.nurullahisik.todo_app.request.UserRegisterRequest;
+import com.nurullahisik.todo_app.response.UserResponse;
 import com.nurullahisik.todo_app.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(UserLoginRequest request)
+    public ResponseEntity<UserResponse> login(UserLoginRequest request)
     {
         return ResponseEntity.ok(userService.login(request));
     }
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(UserRegisterRequest request)
+    public ResponseEntity<UserResponse> register(UserRegisterRequest request)
     {
         return ResponseEntity.ok(userService.register(request));
     }

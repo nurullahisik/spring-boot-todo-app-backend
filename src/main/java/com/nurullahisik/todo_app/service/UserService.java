@@ -4,6 +4,7 @@ import com.nurullahisik.todo_app.entity.User;
 import com.nurullahisik.todo_app.repository.UserRepository;
 import com.nurullahisik.todo_app.request.UserLoginRequest;
 import com.nurullahisik.todo_app.request.UserRegisterRequest;
+import com.nurullahisik.todo_app.response.UserResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +19,7 @@ public class UserService {
         return userRepository.findById(userId).orElse(null);
     }
 
-    public User login(UserLoginRequest request) {
+    public UserResponse login(UserLoginRequest request) {
         User user = userRepository.findByUsername(request.getUsername());
 
         if (user == null){
@@ -29,10 +30,11 @@ public class UserService {
             return null;
         }
 
-        return user;
+        UserResponse userResponse = new UserResponse(user);
+        return userResponse;
     }
 
-    public User register(UserRegisterRequest request) {
+    public UserResponse register(UserRegisterRequest request) {
 
         User user = userRepository.findByUsername(request.getUsername());
 
@@ -43,8 +45,10 @@ public class UserService {
             newUser.setSurname(request.getSurname());
             newUser.setUsername(request.getUsername());
             newUser.setPassword(request.getPassword());
+            userRepository.save(newUser);
 
-            return userRepository.save(newUser);
+            UserResponse userResponse = new UserResponse(newUser);
+            return userResponse;
         }
         return null;
     }

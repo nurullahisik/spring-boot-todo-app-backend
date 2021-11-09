@@ -1,5 +1,6 @@
 package com.nurullahisik.todo_app.entity;
 
+import com.nurullahisik.todo_app.response.UserResponse;
 import lombok.Data;
 
 import javax.persistence.*;
